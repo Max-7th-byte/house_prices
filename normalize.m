@@ -1,4 +1,4 @@
-function [X_norm, mu. sigma] = normalize(X, mu, sigma)
+function [X_norm, mu, sigma] = normalize(X, mu, sigma)
   X_norm = X;
   mu = mean(X_norm);
   sigma = std(X_norm);

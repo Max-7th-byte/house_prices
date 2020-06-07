@@ -1,11 +1,29 @@
+clear ; close all; clc
+
+fprintf('Loading data ...\n');
+
 data = load('training_set.txt');
 X = data(:, 1:2);
 y = data(:, 3);
-alpha = 0.003;
-num_iters = 1500;
+m = length(y);
+fprintf('Normalizing parameters ...\n');
+[X mu sigma] = normalize(X);
+X = [ones(m, 1) X];
+
 theta = zeros(size(X, 2), 1);
+alpha = 0.003;
+num_iters = 2500;
+
+fprintf('Running gradient descent ...\n');
 [theta, J_history] = gradient_descent(X, y, theta, alpha, num_iters);
-plot(num_iters, J_history, 'r');
+fprintf('Theta vector is: \n');
+theta
+fprintf('Program paused. Press enter to continue.\n');
+pause;
+u_ans = input('Do you want to see the graph of cost function?(y/n) ');
+if u_ans == 'y'
+  plot(1:numel(J_history), J_history, '-r', 'LineWidth', 2);
+end
 
 fprintf('Please, enter the parameters of your house:\n');
 size = input('Size (feet squared): ');
